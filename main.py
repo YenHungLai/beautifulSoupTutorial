@@ -1,6 +1,9 @@
 import requests                # Include HTTP Requests module
 import pprint
 import urllib.request
+import os
+import webbrowser
+import csv
 from bs4 import BeautifulSoup  # Include BS web scraping module
 
 # pprint config
@@ -49,15 +52,24 @@ soup = BeautifulSoup(r.text, "html.parser")  # Parses HTTP Response
 # # id
 # print(soup.select("#projects")[0].prettify())
 
-links = soup.select('figure img')
-number = 1
-for link in links:
-    # Access tag attribute
-    url = link['src']
-    r = requests.get(url)
-    with open(f'/Users/Jacob/Desktop/git-repo/beautifulSoupTutorial/imgs/lily{number}.jpg', 'wb') as f:
-        f.write(r.content)
-    number = number + 1
+# # Download imgs
+# links = soup.select('figure img')
+# number = 1
+# for link in links:
+#     # Access tag attribute
+#     url = link['src']
+#     r = requests.get(url)
+#     with open(f'C:/Users/Jacob/Desktop/Python/beautifulSoupTutorial/imgs/lily{number}.jpg', 'wb') as f:
+#         f.write(r.content)
+#     number = number + 1
+
+# Parse local html
+# htmlFile = open('sample.html')
+# soup = BeautifulSoup(htmlFile, 'html.parser')
+# print(soup.prettify())
+# print(soup.title.text)
+# print(soup.body.button.text)
+# print(soup.find('button', class_='damn'))
 
 
 # # Download files
@@ -66,3 +78,12 @@ for link in links:
 
 # with open('/Users/Jacob/Desktop/git-repo/beautifulSoupTutorial/img.jpg', 'wb') as f:
 #     f.write(r.content)
+
+# Open website in a new tab
+# webbrowser.open_new('https://www.crummy.com/software/BeautifulSoup/bs4/doc/')
+
+# Output to CSV
+with open('sample.csv', 'w') as csvFile: 
+    csvWriter = csv.writer(csvFile)
+    for i in range(0, 9):
+        csvWriter.writerow('Amber needs to speak when...\n')
